@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farewell</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#0f0c29,#302b63,#24243e,#000000);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+    color:white;
+    position:relative;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.login-box,
+.main-content{
+    width:90%;
+    max-width:850px;
+    padding:40px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    text-align:center;
+    box-shadow:0 0 30px rgba(255,255,255,0.08);
+    z-index:10;
+}
+
+.main-content{
+    display:none;
+    animation:fade 2s ease;
+}
+
+h1{
+    margin-bottom:20px;
+    font-size:40px;
+}
+
+input{
+    width:100%;
+    max-width:350px;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    outline:none;
+    margin-top:20px;
+    font-size:16px;
+    text-align:center;
+}
+
+button{
+    margin-top:25px;
+    padding:14px 35px;
+    border:none;
+    border-radius:40px;
+    font-size:18px;
+    cursor:pointer;
+    background:white;
+    color:black;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+}
+
+.text{
+    font-size:28px;
+    line-height:1.8;
+    opacity:0;
+    animation:showText 4s forwards;
+}
+
+.bye{
+    margin-top:35px;
+    font-size:22px;
+    letter-spacing:2px;
+    opacity:0;
+    animation:showText 4s forwards;
+    animation-delay:5s;
+}
+
+.error{
+    color:#ff8a8a;
+    margin-top:15px;
+    opacity:0;
+    transition:0.3s;
+}
+
+.star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    opacity:0.5;
+    animation:float linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes showText{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:700px){
+
+    .text{
+        font-size:20px;
+    }
+
+    .bye{
+        font-size:18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box" id="loginBox">
+
+    <h1>Private Access</h1>
+
+    <p>Enter password to continue</p>
+
+    <input type="password" id="password" placeholder="Password">
+
+    <br>
+
+    <button onclick="checkPassword()">
+        Enter
+    </button>
+
+    <div class="error" id="error">
+        Wrong Password
+    </div>
+
+</div>
+
+<div class="main-content" id="mainContent">
+
+    <div class="text">
+        “I can only hope that destiny unfolds in my favor.
+        And if it does not, then both you and I already know
+        the inevitable truth – had I never found you,
+        I would have lost nothing worth searching for.”
+    </div>
+
+    <div class="bye">
+        Bye, @vikumic
+    </div>
+
+    <button onclick="playMusic()">
+        Play Music
+    </button>
+
+</div>
+
+<audio id="music" loop>
+    <source src="song.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+const correctPassword = "amera";
+
+function checkPassword(){
+
+    let userPassword =
+    document.getElementById("password").value;
+
+    if(userPassword === correctPassword){
+
+        document.getElementById("loginBox").style.display="none";
+
+        document.getElementById("mainContent").style.display="block";
+
+        playMusic();
+
+    }else{
+
+        document.getElementById("error").style.opacity="1";
+
+    }
+
+}
+
+function playMusic(){
+
+    document.getElementById("music").play();
+
+}
+
+for(let i=0;i<70;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.left=Math.random()*100+"vw";
+
+    star.style.animationDuration=
+    (5 + Math.random()*10)+"s";
+
+    star.style.opacity=Math.random();
+
+    star.style.width=star.style.height=
+    (2 + Math.random()*4)+"px";
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+</body>
+</html>
